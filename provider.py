@@ -48,7 +48,7 @@ def main():
 
     path = sys.argv[1]
     url = sys.argv[2]
-    url_path = sys.argv[3]
+    url_path = "/add_events"
     events = pandas.read_excel(path)
     body = set_requests_body(events)
     set_response(url, url_path, body)
