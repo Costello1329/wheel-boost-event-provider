@@ -38,11 +38,11 @@ def set_response(url, url_path, body):
 
 
 def main():
-    if len(sys.argv) < 4:
+    if len(sys.argv) < 3:
         print("Error. Too few parameters.")
         sys.exit(1)
 
-    if len(sys.argv) > 4:
+    if len(sys.argv) > 3:
         print("Error. Too many parameters.")
         sys.exit(1)
 
