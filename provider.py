@@ -4,6 +4,16 @@ import http.client
 import json
 
 
+def unwrap(time):
+    if time[0] is "'":
+        time = time[1:len(time)]
+
+    if time[-1] is "'":
+        time = time[0:len(time) - 1]
+
+    return time
+
+
 def set_requests_body(db):
     out_dict = {}
 
@@ -12,8 +22,8 @@ def set_requests_body(db):
             "title": row["title"],
             "coordinates": row["coordinates"],
             "description": row["description"],
-            "startTime": row["startTime"],
-            "endTime": row["endTime"],
+            "startTime": unwrap(row["startTime"]),
+            "endTime": unwrap(row["endTime"]),
             "price": row["price"],
             "peopleCount": row["peopleCount"]
         }
@@ -31,7 +41,7 @@ def set_response(url, url_path, body):
         headers = {'Content-type': 'application/json'}
         connection.request('POST', url_path, json_data, headers)
         response = connection.getresponse()
-        print(response.read().decode())
+        print("response: [", response.read().decode(), "]", sep="")
         print("success")
     except Exception as description:
         print(description)
