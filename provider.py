@@ -62,7 +62,6 @@ def main():
     url_path = "/add_events"
     events = pandas.read_excel(path)
     body = set_requests_body(events)
-    print(body)
     set_response(url, url_path, body)
 
 
