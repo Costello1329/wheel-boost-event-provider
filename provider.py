@@ -15,7 +15,7 @@ def unwrap(time):
 
 
 def set_requests_body(db):
-    out_dict = {}
+    out_list = []
 
     for index, row in db.iterrows():
         event = {
@@ -27,9 +27,10 @@ def set_requests_body(db):
             "price": row["price"],
             "peopleCount": row["peopleCount"]
         }
-        out_dict.update(event)
+        out_list.append(event)
+    print(out_list)
     body = {
-        "events": [out_dict]
+        "events": out_list
     }
     return body
 
