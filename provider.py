@@ -22,6 +22,7 @@ def set_requests_body(db):
             "title": row["title"],
             "coordinates": row["coordinates"],
             "description": row["description"],
+            "isInfinite": row["isInfinite"],
             "startTime": unwrap(row["startTime"]),
             "endTime": unwrap(row["endTime"]),
             "price": row["price"],
