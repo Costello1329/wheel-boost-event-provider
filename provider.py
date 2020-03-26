@@ -28,7 +28,6 @@ def set_requests_body(db):
             "peopleCount": row["peopleCount"]
         }
         out_list.append(event)
-    print(out_list)
     body = {
         "events": out_list
     }
