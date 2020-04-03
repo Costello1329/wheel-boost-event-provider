@@ -1,6 +1,7 @@
 import sys
 import pandas as pandas
 import http.client
+import requests
 import json
 
 
@@ -13,11 +14,22 @@ def unwrap(time):
 
     return time
 
+def get_coordinates(addr):
+    try:
+        response = requests.get('https://nominatim.openstreetmap.org/search/{}?format=json&limit=1'.format(addr))
+        response_json = response.json()[0]
+        lat = response_json['lat']
+        lon = response_json['lon']
+        return '{};{}'.format(lat, lon)
+    except Exception as e:
+        return ''
+
 
 def set_requests_body(db):
     out_list = []
 
     for index, row in db.iterrows():
+        row["coordinates"] = get_coordinates(row["addres"])
         event = {
             "title": row["title"],
             "coordinates": row["coordinates"],
@@ -28,7 +40,8 @@ def set_requests_body(db):
             "price": row["price"],
             "peopleCount": row["peopleCount"]
         }
-        out_list.append(event)
+        if row["coordinates"]:
+            out_list.append(event)
     body = {
         "events": out_list
     }
